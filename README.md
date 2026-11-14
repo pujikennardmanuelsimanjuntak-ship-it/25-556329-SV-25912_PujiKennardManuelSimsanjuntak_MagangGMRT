@@ -73,8 +73,7 @@ Lalu pilih mode: ketik `1` untuk Forward Kinematics atau `2` untuk Inverse Kinem
 
 ## Bukti Perhitungan Manual
 Coretan tangan rumus dan perhitungan:
-- ![Coretan FK](File_Pendukung/coretan_FK.jpg)
-- ![Coretan IK](File_Pendukung/coretan_IK.jpg)
+- ![Coretan FK dan Coretan IK](File_Pendukung/output_diluar_jangkauan.jpg)
 
 ## Struktur Repositori
 ```
