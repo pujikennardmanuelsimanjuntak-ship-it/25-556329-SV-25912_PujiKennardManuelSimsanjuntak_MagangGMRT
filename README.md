@@ -61,24 +61,24 @@ Lalu pilih mode: ketik `1` untuk Forward Kinematics atau `2` untuk Inverse Kinem
 | Lutut | 22.215 | 18.641 |
 | End-effector | 26.320 | 29.917 |
 
-![Output FK](images/output_FK.png)
+![Output FK](File_Pendukung/output_FK.png)
 
 **Inverse Kinematics** (target x = 26.320, y = 29.917) menghasilkan θ₁ ≈ 40° dan θ₂ ≈ 30°, sesuai input FK sehingga kedua mode saling terbukti konsisten.
 
-![Output IK](images/output_IK.png)
+![Output IK](File_Pendukung/output_IK.png)
 
 **Target di luar jangkauan** (contoh x = 50, y = 50) menampilkan pesan peringatan.
 
-![Output di luar jangkauan](images/output_diluar_jangkauan.png)
+![Output di luar jangkauan](File_Pendukung/output_diluar_jangkauan.png)
 
 ## Bukti Perhitungan Manual
 Coretan tangan rumus dan perhitungan:
-- ![Coretan FK](images/coretan_FK.jpg)
-- ![Coretan IK](images/coretan_IK.jpg)
+- ![Coretan FK](File_Pendukung/coretan_FK.jpg)
+- ![Coretan IK](File_Pendukung/coretan_IK.jpg)
 
 ## Struktur Repositori
 ```
 ├── main.py        # program FK dan IK
 ├── README.md
-└── images/        # screenshot output dan foto coretan
+└── File_Pendukung/        # screenshot output dan foto coretan
 ```
