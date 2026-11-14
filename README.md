@@ -80,5 +80,5 @@ Coretan tangan rumus dan perhitungan:
 ```
 ├── main.py        # program FK dan IK
 ├── README.md
-└── images/        # screenshot output dan foto coretan
+└── File_Pendukung/        # screenshot output dan foto coretan
 
