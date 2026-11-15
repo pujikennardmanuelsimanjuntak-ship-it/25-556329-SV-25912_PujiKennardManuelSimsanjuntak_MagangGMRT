@@ -1,11 +1,28 @@
-#Guna import ini menjadi library untuk sin,cos,acos,atan2 dan konversi sudut
+#math: library untuk sin, cos, acos, atan2, dan konversi derajat <-> radia
 import math
+
+#matplotlib: lilbrary untuk menggambar plot postur kaki. Tapi perlu di pasang pip install matplotlib terlebihdahulu
+import matplotlib.pyplot as plt
 
 print("------------------------MENU------------------------")
 
 #Variable adalah panjang segmen (cm), yang di tentukan dengan NIU dan NIF
 femur = 29
 tibia = 12
+
+#Fungsi plot FK dan IK: menggambar Femur (merah) dan Tibia (hijau) dari daftar titik x dan y, memberi judul, lalu menyimpannya ke file sebelum ditampilkan
+def gambar_jalur(daftar_x, daftar_y, judul, uji_plot_file):
+    plt.figure()
+    plt.plot(daftar_x[0:2],daftar_y[0:2], color="red", marker="o", label="Femur(Servo 1)")
+    plt.plot(daftar_x[1:3],daftar_y[1:3], color="green", marker="o", label="Tibia(Servo 2)")
+    plt.legend()
+    plt.title(judul)
+    plt.xlabel("x (cm)")
+    plt.ylabel("y (cm)")
+    plt.grid(True)
+    plt.axis("equal")
+    plt.savefig(uji_plot_file)
+    plt.show()
 
 print("pilih 1 (Forward Kinematics) atau pilih 2 (Invers_Kinematics)")
 pilihan = input("Pilihan:")
@@ -32,6 +49,10 @@ if pilihan == "1":
     #Print ini dapat menampilkan hasil posisi FK, dengan :.3f mengambil 3 angka desimal
     print(f"Lutut: x = {x1:.3f}, y = {y1:.3f}")
     print(f"End-effector: x = {x2:.3f}, y = {y2:.3f}")
+
+    #Membuat judul plot dari sudut input, lalu menggambar postur FK: titik pangkal, lutut (x1,y1), dan ujung (x2,y2), disimpan sebagai plot_FK.png
+    judul = f"Postur FK: θ₁={sudut1_deg}°, θ₂={sudut2_deg}°"
+    gambar_jalur([0, x1, x2], [0, y1, y2], judul, "plot_FK.png")
 
 
 elif pilihan == "2":
@@ -67,6 +88,11 @@ elif pilihan == "2":
         #Rumusnya θ₁ = alpha - beta
         sudut1_ik = tan_α - sudut_β
 
+        #Tambahan untuk plot IK: titik lutut belum diketahui di IK, jadi dihitung dari panjang Femur dan sudut θ₁ hasil IK (diubah ke radian dulu), supaya Femur dan Tibia bisa digambar
+        sudut1_ik_rad = (math.radians(sudut1_ik))
+        lutut_x = femur * math.cos(sudut1_ik_rad)
+        lutut_y = femur * math.sin(sudut1_ik_rad)
+
         #Print ini dapat menampilkan sudut servo IK, :.2f atau :.3f membantu mengambil digit desimal di belakang koma
         print(f"Hasil Sudut C = {sudut_C:.3f}")
         print(f"Hasil Sudut α = {tan_α:.3f}")
@@ -74,5 +100,8 @@ elif pilihan == "2":
         print(f"Hasil θ₁ = {sudut1_ik:.2f}")
         print(f"Hasil θ₂ = {sudut2_ik:.2f}")
 
+        #Membuat judul dari sudut hasil IK, lalu menggambar postur: titik lutut dihitung dari θ₁ hasil IK dan titik ujung adalah target, disimpan sebagai plot_IK.png
+        judul = f"Postur IK: θ₁={sudut1_ik:.2f}°, θ₂={sudut2_ik:.2f}°"
+        gambar_jalur([0, lutut_x, target_x], [0, lutut_y, target_y], judul, "plot_IK.png")
 else:
     print("pilihan tidak valid")
